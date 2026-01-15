@@ -1,7 +1,7 @@
 import React, { use, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
-import Blogimg from "../../assets/Blogimg.jpg";
+import Blogimg from "../../assets/Blog.jpg";
 import { blogs } from "../../data/blogs";
 
 export const Blog = () => {
