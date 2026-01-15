@@ -3,26 +3,26 @@
 // gradient: "linear-gradient(145deg, #3B82F6, #000)",
 import Adrin from "../assets/TeamMembers/ad.jpg";
 import Aishwaria from "../assets/TeamMembers/Aish.png";
-import Ankur from "../assets/TeamMembers/ankur.jpg";
-import Anurag from "../assets/TeamMembers/anurag.jpg";
-import Bharath from "../assets/TeamMembers/bharath.jpg";
-import Isha from "../assets/TeamMembers/isha.jpg";
-import Lovish from "../assets/TeamMembers/lovish.jpg";
-import Murali from "../assets/TeamMembers/murali.jpeg";
-import Nidhi from "../assets/TeamMembers/nidhi.jpeg";
-import Prajna from "../assets/TeamMembers/prajna.png";
-import Ragvendhra from "../assets/TeamMembers/rag.jpg";
-import Rajeev from "../assets/TeamMembers/rajeev.jpg";
-import Rishabh from "../assets/TeamMembers/rishabh.jpg";
-import Sajal from "../assets/TeamMembers/sajal.jpg";
-import Sanya from "../assets/TeamMembers/sanya.jpg";
-import Saurabh from "../assets/TeamMembers/saurabh.jpg";
-import Shambhavi from "../assets/TeamMembers/shambhavi.jpg";
-import Shishir from "../assets/TeamMembers/shishir.jpg";
-import Sufyan from "../assets/TeamMembers/sufyan.jpg";
-import Suparn from "../assets/TeamMembers/suparn.jpg";
-import Supreeth from "../assets/TeamMembers/supreeth.jpg";
-import Varsha from "../assets/TeamMembers/varsha.jpg";
+import Ankur from "../assets/TeamMembers/Ankur.jpg";
+import Anurag from "../assets/TeamMembers/Anurag.jpg";
+import Bharath from "../assets/TeamMembers/Bharath.jpg";
+import Isha from "../assets/TeamMembers/Isha.jpg";
+import Lovish from "../assets/TeamMembers/Lovish.jpg";
+import Murali from "../assets/TeamMembers/Murali.jpeg";
+import Nidhi from "../assets/TeamMembers//Nidhi.jpeg";
+import Prajna from "../assets/TeamMembers/Prajna.png";
+import Ragvendhra from "../assets/TeamMembers/Rag.jpg";
+import Rajeev from "../assets/TeamMembers/Rajeev.jpg";
+import Rishabh from "../assets/TeamMembers/Rishabh.jpg";
+import Sajal from "../assets/TeamMembers/Sajal.jpg";
+import Sanya from "../assets/TeamMembers/Sanya.jpg";
+import Saurabh from "../assets/TeamMembers/Saurabh.jpg";
+import Shambhavi from "../assets/TeamMembers/Shambhavi.jpg";
+import Shishir from "../assets/TeamMembers/Shishir.jpg";
+import Sufyan from "../assets/TeamMembers/Sufyan.jpg";
+import Suparn from "../assets/TeamMembers/Suparn.jpg";
+import Supreeth from "../assets/TeamMembers/Supreeth.jpg";
+import Varsha from "../assets/TeamMembers/Varsha.jpg";
 
 export const members = [
     {
