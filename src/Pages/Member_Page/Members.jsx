@@ -1,55 +1,85 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import Team from "../../assets/Team.jpg";
+import { useNavigate } from "react-router-dom";
+import ChromaGrid from "../../assets/ChromaGrid";
+import { members } from "../../data/members";
 
 export const Members = () => {
+  const navigate = useNavigate();
+  const gridContainerRef = useRef(null);
+  const [gridHeight, setGridHeight] = useState("auto");
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const members = Array(6)
-    .fill(null)
-    .map((_, i) => ({
-      id: i + 1,
-      name: "Name",
-      role: "<Role>",
-    }));
+  // Convert members into ChromaGrid format
+  const items = members.map((member) => ({
+    image: member.image,
+    title: member.name,
+    subtitle: member.role,
+    handle: member.handle,
+    borderColor: member.borderColor,
+    gradient: member.gradient,
+    url: `/members/${member.slug}`,
+    onClick: () => navigate(`/members/${member.slug}`),
+  }));
+
+  // Measure actual grid height after render
+  useEffect(() => {
+    const measureGridHeight = () => {
+      if (gridContainerRef.current) {
+        const actualHeight = gridContainerRef.current.scrollHeight;
+        setGridHeight(`${actualHeight}px`);
+      }
+    };
+
+    // Measure after initial render
+    const timer = setTimeout(measureGridHeight, 100);
+
+    // Remeasure on window resize
+    const handleResize = () => {
+      setGridHeight("auto");
+      setTimeout(measureGridHeight, 100);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [items.length]);
 
   return (
-    <div className="min-h-screen">
-      <div className="bg-cyan-300 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold mb-2">Members</h1>
-          <p className="text-gray-700">[group photo of codeshack]</p>
+    <div className="min-h-screen bg-black text-white">
+      {/* HERO */}
+      <div className="relative overflow-hidden h-64 sm:h-80 md:h-150">
+        <img src={Team} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/40"></div>
+
+        <div className="absolute inset-0 flex mt-20 justify-center">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold uppercase tracking-wider">
+            Members_
+          </h1>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold">Batch of 2024</h2>
-          <select className="border border-gray-300 rounded px-4 py-2">
-            <option>2024</option>
-            <option>2023</option>
-            <option>2022</option>
-          </select>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {members.map((member) => (
-            <div
-              key={member.id}
-              className="bg-white rounded-lg overflow-hidden shadow-sm"
-            >
-              <div className="bg-gray-200 h-64"></div>
-              <div className="p-4 bg-gray-100">
-                <h3 className="font-semibold text-center mb-1">
-                  {member.name}
-                </h3>
-                <p className="text-sm text-gray-600 text-center">
-                  {member.role}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* GRID */}
+      <div
+        ref={gridContainerRef}
+        style={{
+          minHeight: gridHeight === "auto" ? "500px" : gridHeight,
+          position: "relative",
+        }}
+      >
+        <ChromaGrid
+          items={items}
+          radius={300}
+          damping={0.45}
+          fadeOut={0.6}
+          ease="power3.out"
+        />
       </div>
     </div>
   );

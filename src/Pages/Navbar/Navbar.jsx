@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import Codeshack from "../../assets/CodeShack.png";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,62 +9,66 @@ export const Navbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  const navLinkClasses = (path) =>
+    `relative px-1 py-2 transition-all duration-300
+     ${
+       isActive(path)
+         ? "text-white font-semibold after:w-full"
+         : "text-gray-400 hover:text-white after:w-0"
+     }
+     after:absolute after:left-0 after:-bottom-1 after:h-[2px]
+     after:bg-gradient-to-r after:from-purple-500 after:to-pink-500
+     after:transition-all after:duration-300`;
+
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
+    <nav className="sticky top-0 z-50 backdrop-blur-md bg-black/70 border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+
           <Link
             to="/"
-            className="text-xl font-bold cursor-pointer"
             onClick={() => setIsMenuOpen(false)}
+            className=""
           >
-            &lt;CodeShack/&gt;
+            <img src={Codeshack} alt="CodeShack Logo" className="h-12" />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            
-            <Link
-              to="/members"
-              className={`${
-                isActive("/members")
-                  ? "text-black font-semibold"
-                  : "text-gray-600"
-              } hover:text-black`}
-            >
+          <div className="hidden md:flex space-x-10">
+            <Link to="/members" className={navLinkClasses("/members")}>
               Members
             </Link>
 
-            <Link
-              to="/blogs"
-              className={`${
-                isActive("/blogs")
-                  ? "text-black font-semibold"
-                  : "text-gray-600"
-              } hover:text-black`}
-            >
+            <Link to="/blogs" className={navLinkClasses("/blogs")}>
               Blogs
             </Link>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden p-2 rounded-full bg-white/10 hover:bg-white/20 transition"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? (
+              <X size={22} className="text-white" />
+            ) : (
+              <Menu size={22} className="text-white" />
+            )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden pb-4">
-            
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ${
+            isMenuOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="mt-3 space-y-2 rounded-2xl bg-black/90 p-4 border border-white/10">
             <Link
               to="/members"
               onClick={() => setIsMenuOpen(false)}
-              className="block py-2 text-gray-600 hover:text-black"
+              className="block px-4 py-2 rounded-lg text-gray-300
+                         hover:bg-white/10 hover:text-white transition"
             >
               Members
             </Link>
@@ -71,12 +76,13 @@ export const Navbar = () => {
             <Link
               to="/blogs"
               onClick={() => setIsMenuOpen(false)}
-              className="block py-2 text-gray-600 hover:text-black"
+              className="block px-4 py-2 rounded-lg text-gray-300
+                         hover:bg-white/10 hover:text-white transition"
             >
               Blogs
             </Link>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );

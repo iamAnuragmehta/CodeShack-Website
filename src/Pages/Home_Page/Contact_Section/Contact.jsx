@@ -6,8 +6,17 @@ import {
   FaDiscord,
   FaWhatsapp,
 } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 export const Contact = () => {
+  const location = useLocation();
+
+  const isMembersPage = location.pathname === "/members";
+  // treat both the blogs listing and blog detail routes as blog pages
+  const isBlogsPage =
+    location.pathname === "/blogs" || location.pathname.startsWith("/blog/");
+  const isBlogsDetailPage = location.pathname === "/blog/:blogId";
+
   const SocialButton = ({ href, label, bgColor, children }) => {
     return (
       <a
@@ -44,42 +53,54 @@ export const Contact = () => {
   };
 
   return (
-    <footer className="w-screen bg-black text-white">
-      <div className="mx-10 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-wrap justify-between">
+    <footer
+      className={`min-h-100 px-4 sm:px-6 py-12 sm:py-16 bg-tech-grid ${
+        isMembersPage || isBlogsPage || isBlogsDetailPage ? "bg-black" : ""
+      }`}
+    >
+      <section className="relative">
+        <div
+          className="absolute bottom-[-200px] left-1/2 -translate-x-1/2
+    w-[1200px] h-[400px] bg-orange-500/40 blur-[150px]"
+        />
+      </section>
+
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           <div>
-            <h3 className="font-semibold text-lg">CONTACT US</h3>
-            <p className="text-sm py-4">
+            <h3 className="font-semibold text-lg sm:text-xl">CONTACT US</h3>
+            <p className="text-xs sm:text-sm py-4">
               Sir M. Visvesvaraya Institute of Technology, <br />
               International Airport Road, <br />
               Yelahanka, Bengaluru, Karnataka 562157
             </p>
-            <p className="text-sm">
+            <p className="text-xs sm:text-sm">
               glug@smvit.edu <br />
               techhub@smvit.edu
             </p>
           </div>
 
-          <div>
-            <p className="text-sm">Made with ❤ by</p>
-            <span className="text-9xl">&lt;CodeShack/&gt;</span>
+          <div className="flex flex-col items-start md:items-end justify-center">
+            <span className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold">
+              &lt;CodeShack/&gt;
+            </span>
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-between mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 sm:mt-12">
           <div>
-            <p className="text-sm bottom-0 mt-4 ">
+            <p className="text-xs sm:text-sm">
               © 2026 CodeShack. All Rights Reserved.
             </p>
           </div>
 
-          <div className="flex space-x-3">
+          <div className="flex flex-wrap gap-3 justify-start md:justify-end">
             <SocialButton
               href="https://x.com/_techhub"
               label="Twitter"
               bgColor="bg-sky-500"
             >
-              <FaTwitter />
+              <FaTwitter size={16} />
             </SocialButton>
 
             <SocialButton
@@ -87,7 +108,7 @@ export const Contact = () => {
               label="Instagram"
               bgColor="bg-pink-500"
             >
-              <FaInstagram />
+              <FaInstagram size={16} />
             </SocialButton>
 
             <SocialButton
@@ -95,7 +116,7 @@ export const Contact = () => {
               label="LinkedIn"
               bgColor="bg-blue-600"
             >
-              <FaLinkedinIn />
+              <FaLinkedinIn size={16} />
             </SocialButton>
 
             <SocialButton
@@ -103,7 +124,7 @@ export const Contact = () => {
               label="Discord"
               bgColor="bg-indigo-500"
             >
-              <FaDiscord />
+              <FaDiscord size={16} />
             </SocialButton>
 
             <SocialButton
@@ -111,7 +132,7 @@ export const Contact = () => {
               label="WhatsApp"
               bgColor="bg-green-500"
             >
-              <FaWhatsapp />
+              <FaWhatsapp size={16} />
             </SocialButton>
           </div>
         </div>
