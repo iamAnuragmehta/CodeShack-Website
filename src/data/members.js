@@ -2,7 +2,7 @@
 // borderColor: "#3B82F6",
 // gradient: "linear-gradient(145deg, #3B82F6, #000)",
 import Adrin from "../assets/TeamMembers/ad.jpg";
-import Aishwaria from "../assets/TeamMembers/aish.png";
+import Aishwaria from "../assets/TeamMembers/Aish.png";
 import Ankur from "../assets/TeamMembers/ankur.jpg";
 import Anurag from "../assets/TeamMembers/anurag.jpg";
 import Bharath from "../assets/TeamMembers/bharath.jpg";
