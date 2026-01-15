@@ -68,7 +68,7 @@ export const Members = () => {
       {/* GRID */}
       <div
         ref={gridContainerRef}
-        className="relative px-6 sm:px-10 md:px-16 lg:px-24"
+        className="relative"
         style={{
           minHeight: gridHeight === "auto" ? "500px" : gridHeight,
         }}
