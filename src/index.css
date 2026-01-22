@@ -2,15 +2,11 @@
 
 :root {
   font-family: 'Montserrat', sans-serif;
-font-weight: 900;
-letter-spacing: 0.02em;
-
-  line-height: 1.5;
-
+  font-weight: 900;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #000000;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -22,6 +18,7 @@ html,
 body {
   max-width: 100%;
   overflow-x: hidden;
+  min-height: auto;
 }
 
 /* Offset page content to account for fixed navbar (h-16 = 4rem) */
