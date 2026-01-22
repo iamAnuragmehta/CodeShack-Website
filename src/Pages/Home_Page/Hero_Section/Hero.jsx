@@ -56,12 +56,12 @@ export const Hero = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-className="flex flex-col items-center justify-center mb-4 sm:mb-8 mt-0 sm:mt-2"
+          className="flex flex-col items-center justify-center mb-4 sm:mb-8 mt-0 sm:mt-2"
         >
           <img
             src={collegeLogo}
             alt="College Logo"
-className="h-10 sm:h-14 md:h-16 mb-2 sm:mb-3 mx-auto"
+            className="h-10 sm:h-14 md:h-16 mb-2 sm:mb-3 mx-auto"
           />
 
           <p className="text-xs sm:text-sm md:text-base tracking-widest uppercase text-gray-400 text-center">
@@ -87,7 +87,7 @@ className="h-10 sm:h-14 md:h-16 mb-2 sm:mb-3 mx-auto"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-className="text-3xl sm:text-6xl md:text-7xl font-extrabold mb-4 sm:mb-6"
+          className="text-3xl sm:text-6xl md:text-7xl font-extrabold mb-4 sm:mb-6"
         >
           &lt;<span className="text-orange-500">CODESHACK</span>/&gt;
         </motion.h1>
@@ -97,7 +97,7 @@ className="text-3xl sm:text-6xl md:text-7xl font-extrabold mb-4 sm:mb-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9 }}
-className="text-base sm:text-xl md:text-2xl text-gray-300 mb-5 sm:mb-8"
+          className="text-base sm:text-xl md:text-2xl text-gray-300 mb-5 sm:mb-8"
         >
           <TextType
             text={[
@@ -117,7 +117,7 @@ className="text-base sm:text-xl md:text-2xl text-gray-300 mb-5 sm:mb-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-className="hidden md:flex text-sm text-gray-400 max-w-3xl mx-auto mb-8 leading-relaxed text-center"
+          className="text-sm text-gray-400 max-w-3xl mx-auto mb-8 leading-relaxed text-center"
         >
           CODESHACK is the official student technical community fostering
           open-source culture, hands-on development, and problem-solving skills.
@@ -130,7 +130,7 @@ className="hidden md:flex text-sm text-gray-400 max-w-3xl mx-auto mb-8 leading-r
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1.8 }}
-className="flex items-center justify-center w-full mt-2 sm:mt-6"
+          className="flex items-center justify-center w-full mt-2 sm:mt-6"
         >
           <svg
             width="300"
