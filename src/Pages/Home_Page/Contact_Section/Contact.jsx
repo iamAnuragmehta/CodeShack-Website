@@ -31,12 +31,10 @@ const CommandMenu = ({ open, onClose, title, links }) => {
 
     window.addEventListener("scroll", closeOnScroll, { passive: true });
     window.addEventListener("keydown", closeOnEsc);
-    document.addEventListener("pointerdown", closeOnOutsideClick);
 
     return () => {
       window.removeEventListener("scroll", closeOnScroll);
       window.removeEventListener("keydown", closeOnEsc);
-      document.removeEventListener("pointerdown", closeOnOutsideClick);
     };
   }, [open, onClose]);
 
@@ -84,6 +82,9 @@ const CommandMenu = ({ open, onClose, title, links }) => {
           <a
             key={link.url}
             href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => onClose()}
             className="block px-4 py-3 text-sm
             border-b border-white/5 last:border-none"
           >
@@ -228,7 +229,6 @@ export const Contact = () => {
         <div
           className="bg-black/90 backdrop-blur
       border border-orange-500/30
-      overflow-hidden
       shadow-[0_0_60px_rgba(255,140,0,0.25)]"
         >
           <div

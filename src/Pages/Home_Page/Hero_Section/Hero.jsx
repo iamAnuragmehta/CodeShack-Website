@@ -130,19 +130,19 @@ export const Hero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1.8 }}
-          className="flex items-center justify-center w-full mt-2 sm:mt-6"
+          className="flex items-center justify-center mx-auto mt-2 sm:mt-6"
         >
           <svg
-            width="300"
+            width="320"
             height="120"
-            viewBox="0 0 300 120"
+            viewBox="0 0 320 120"
             fill="none"
             className="mx-auto"
           >
             <rect
               x="20"
               y="10"
-              width="260"
+              width="280"
               height="100"
               rx="14"
               fill="#111"
