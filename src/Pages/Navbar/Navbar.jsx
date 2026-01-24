@@ -39,9 +39,9 @@ export const Navbar = () => {
               Members
             </Link>
 
-            <Link to="/blogs" className={navLinkClasses("/blogs")}>
+            {/* <Link to="/blogs" className={navLinkClasses("/blogs")}>
               Blogs
-            </Link>
+            </Link> */}
           </div>
 
           {/* Mobile Menu Button */}
