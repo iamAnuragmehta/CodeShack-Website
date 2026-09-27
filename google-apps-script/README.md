@@ -11,16 +11,23 @@ This connects the site's `/register` form to a Google Sheet using a free Apps Sc
 3. Save the project (any name).
 4. In the toolbar's function dropdown, select **setupSheet**, then click **Run**.
    The first time, Google will ask you to authorize the script — approve it.
-   This creates a `Sheet1` tab (if it doesn't exist) with a bold, frozen
-   header row: `Timestamp | Name | USN | Phone | Branch | Year`.
-   - You can skip this — `doPost` creates the header row automatically the
-     first time someone submits the form — but running it once means the
-     sheet looks right before any real submissions come in.
-   - If you already had a sheet from before the Phone field was added,
-     re-run **setupSheet** once after updating the script — it'll rewrite
-     the header row to include Phone. Any rows submitted before that will
-     still only have 5 columns of data, so they'll look shifted; only new
-     submissions land under the correct columns.
+   This creates **one tab per role** (`Video Editing`, `Design`, `Social
+   Media`, `Technical`, `Manager` — must match `ROLES` in `Register.jsx`),
+   each with its own bold, frozen header row: `Timestamp | Name | USN |
+   Phone | Branch | Year`. Applicants for a given role only land in that
+   role's tab — there's no shared/combined tab.
+   - You can skip this — `doPost` creates a role's tab automatically the
+     first time someone submits for that role — but running it once means
+     every tab exists and looks right before any real submissions come in.
+   - If you add/rename a role, update the `ROLES` array in **both**
+     `Code.gs` and `Register.jsx`, then re-run **setupSheet** to create the
+     new tab.
+
+**Migrating from the old single-tab setup:** if your sheet already has a
+`Sheet1` tab with rows in it from before roles existed, those rows stay put —
+the script no longer writes to `Sheet1` at all, only to the per-role tabs.
+Feel free to keep `Sheet1` around as an archive or delete it once you've
+copied anything you need out of it.
 
 ## 3. Deploy as a Web App
 1. Click `Deploy > New deployment`.

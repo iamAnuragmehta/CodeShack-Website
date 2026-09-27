@@ -8,7 +8,10 @@ import {
   Users,
   Award,
 } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import TextType from "../../assets/TextType";
+
+const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/GJGVtjhGgMbL0P530GfYgP?mode=gi_t";
 
 // Deployed Google Apps Script Web App URL (see google-apps-script/README.md for setup).
 const SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || "";
@@ -190,10 +193,21 @@ export const Register = () => {
                   <p className="text-gray-400 text-sm max-w-xs">
                     Thanks for applying — we'll reach out with next steps soon.
                   </p>
+
+                  <a
+                    href={WHATSAPP_GROUP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 flex items-center gap-2 bg-green-500 hover:bg-green-400 text-black font-semibold font-mono rounded-lg px-5 py-2.5 transition shadow-[0_0_25px_rgba(34,197,94,0.25)] hover:shadow-[0_0_35px_rgba(34,197,94,0.45)]"
+                  >
+                    <FaWhatsapp size={18} />
+                    Join our WhatsApp group
+                  </a>
+
                   <button
                     type="button"
                     onClick={() => setStatus("idle")}
-                    className="mt-4 text-orange-400 text-sm underline underline-offset-4"
+                    className="mt-2 text-orange-400 text-sm underline underline-offset-4"
                   >
                     Submit another response
                   </button>

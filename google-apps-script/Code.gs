@@ -1,13 +1,16 @@
 /**
  * CodeShack recruitment form -> Google Sheet bridge.
  *
+ * Each role gets its own tab (e.g. "Design", "Technical") instead of one
+ * shared tab, so recruiters for each role only see their own applicants.
+ *
  * Setup:
  * 1. Create a Google Sheet.
  * 2. Extensions > Apps Script, delete any boilerplate, paste this file's contents.
  * 3. In the function dropdown (top toolbar) select "setupSheet", then click
- *    Run once — this creates the "Sheet1" tab and header row for you.
- *    (The header row is also created automatically on the first form
- *    submission if you skip this step.)
+ *    Run once — this creates one tab per role in ROLES below, each with its
+ *    own header row. (Tabs are also created automatically as submissions
+ *    for that role come in, if you skip this step.)
  * 4. Deploy > New deployment > type "Web app".
  *      - Execute as: Me
  *      - Who has access: Anyone
@@ -17,16 +20,23 @@
  *    you edit this script, otherwise the live URL keeps serving old code.
  */
 
-const SHEET_NAME = "Sheet1"; // change if your tab is named differently
-const HEADERS = ["Timestamp", "Name", "USN", "Phone", "Branch", "Year", "Role"];
+// Must stay in sync with ROLES in src/Pages/Register_Page/Register.jsx —
+// each entry here becomes its own sheet tab, named exactly as listed.
+const ROLES = ["Video Editing", "Design", "Social Media", "Technical", "Manager"];
+const HEADERS = ["Timestamp", "Name", "USN", "Phone", "Branch", "Year"];
 
 /**
  * Run this once from the Apps Script editor (select "setupSheet" in the
- * function dropdown, then click Run) to create the header row. Safe to
- * run more than once — it won't duplicate headers if they're already there.
+ * function dropdown, then click Run) to create a tab + header row per role.
+ * Safe to run more than once — it won't duplicate headers if they're
+ * already there.
  */
 function setupSheet() {
-  const sheet = getOrCreateSheet();
+  ROLES.forEach(setupRoleSheet);
+}
+
+function setupRoleSheet(role) {
+  const sheet = getOrCreateSheet(role);
   const firstRow = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
   const hasHeaders = HEADERS.every((h, i) => firstRow[i] === h);
 
@@ -39,20 +49,17 @@ function setupSheet() {
   // Keep phone numbers as plain text so Sheets doesn't reformat/round them.
   const phoneColumn = HEADERS.indexOf("Phone") + 1;
   sheet.getRange(1, phoneColumn, sheet.getMaxRows(), 1).setNumberFormat("@");
+
+  return sheet;
 }
 
-function getOrCreateSheet() {
+function getOrCreateSheet(sheetName) {
   const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  return spreadsheet.getSheetByName(SHEET_NAME) || spreadsheet.insertSheet(SHEET_NAME);
+  return spreadsheet.getSheetByName(sheetName) || spreadsheet.insertSheet(sheetName);
 }
 
 function doPost(e) {
   try {
-    const sheet = getOrCreateSheet();
-    if (sheet.getLastRow() === 0) {
-      setupSheet();
-    }
-
     const params = e.parameter;
 
     const name = (params.name || "").toString().trim();
@@ -66,7 +73,12 @@ function doPost(e) {
       return jsonResponse({ result: "error", message: "Missing required field(s)." });
     }
 
-    sheet.appendRow([new Date(), name, usn, phone, branch, year, role]);
+    if (ROLES.indexOf(role) === -1) {
+      return jsonResponse({ result: "error", message: "Unknown role." });
+    }
+
+    const sheet = setupRoleSheet(role);
+    sheet.appendRow([new Date(), name, usn, phone, branch, year]);
 
     return jsonResponse({ result: "success" });
   } catch (err) {
