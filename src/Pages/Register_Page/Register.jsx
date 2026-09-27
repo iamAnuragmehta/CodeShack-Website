@@ -14,6 +14,7 @@ import TextType from "../../assets/TextType";
 const SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || "";
 
 const YEARS = ["2nd Year", "3rd Year", "4th Year"];
+const ROLES = ["Video Editing", "Design", "Social Media", "Technical", "Manager"];
 
 const PERKS = [
   { icon: Code2, text: "Real projects, not just theory" },
@@ -55,7 +56,7 @@ const FieldLabel = ({ children }) => (
 );
 
 export const Register = () => {
-  const [form, setForm] = useState({ name: "", usn: "", phone: "", branch: "", year: "" });
+  const [form, setForm] = useState({ name: "", usn: "", phone: "", branch: "", year: "", role: "" });
   const [status, setStatus] = useState("idle"); // idle | success | error
   const [touched, setTouched] = useState(false);
 
@@ -66,7 +67,7 @@ export const Register = () => {
 
   const isValidPhone = /^\d{10}$/.test(form.phone.trim());
   const isComplete =
-    form.name.trim() && form.usn.trim() && isValidPhone && form.branch.trim() && form.year;
+    form.name.trim() && form.usn.trim() && isValidPhone && form.branch.trim() && form.year && form.role;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -88,6 +89,7 @@ export const Register = () => {
     body.append("phone", form.phone.trim());
     body.append("branch", form.branch.trim());
     body.append("year", form.year);
+    body.append("role", form.role);
 
     // Apps Script round-trips take a couple of seconds (script boot + sheet
     // write + redirect), and mode:"no-cors" makes the response opaque anyway
@@ -103,7 +105,7 @@ export const Register = () => {
     });
 
     setStatus("success");
-    setForm({ name: "", usn: "", phone: "", branch: "", year: "" });
+    setForm({ name: "", usn: "", phone: "", branch: "", year: "", role: "" });
     setTouched(false);
   };
 
@@ -285,6 +287,24 @@ export const Register = () => {
                       ))}
                     </div>
                     {touched && !form.year && (
+                      <p className="text-red-400 text-xs mt-1 font-mono">// required</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <FieldLabel>select_role --one</FieldLabel>
+                    <div className="flex flex-wrap gap-2">
+                      {ROLES.map((role) => (
+                        <Pill
+                          key={role}
+                          active={form.role === role}
+                          onClick={() => setForm((prev) => ({ ...prev, role }))}
+                        >
+                          {role}
+                        </Pill>
+                      ))}
+                    </div>
+                    {touched && !form.role && (
                       <p className="text-red-400 text-xs mt-1 font-mono">// required</p>
                     )}
                   </div>

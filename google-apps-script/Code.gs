@@ -18,7 +18,7 @@
  */
 
 const SHEET_NAME = "Sheet1"; // change if your tab is named differently
-const HEADERS = ["Timestamp", "Name", "USN", "Phone", "Branch", "Year"];
+const HEADERS = ["Timestamp", "Name", "USN", "Phone", "Branch", "Year", "Role"];
 
 /**
  * Run this once from the Apps Script editor (select "setupSheet" in the
@@ -60,12 +60,13 @@ function doPost(e) {
     const phone = (params.phone || "").toString().trim();
     const branch = (params.branch || "").toString().trim();
     const year = (params.year || "").toString().trim();
+    const role = (params.role || "").toString().trim();
 
-    if (!name || !usn || !phone || !branch || !year) {
+    if (!name || !usn || !phone || !branch || !year || !role) {
       return jsonResponse({ result: "error", message: "Missing required field(s)." });
     }
 
-    sheet.appendRow([new Date(), name, usn, phone, branch, year]);
+    sheet.appendRow([new Date(), name, usn, phone, branch, year, role]);
 
     return jsonResponse({ result: "success" });
   } catch (err) {
